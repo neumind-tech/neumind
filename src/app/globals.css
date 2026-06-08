@@ -1,0 +1,280 @@
+/* ─── NOTE: next/font/google in layout.tsx handles all font loading. ─── */
+/* No @import needed — CSS variables are injected via the <html> className. */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ════════════════════════════════════════════════
+   DESIGN TOKENS
+   ════════════════════════════════════════════════ */
+:root {
+  --gold-300: #EDD98A;
+  --gold-400: #E0C055;
+  --gold-500: #C9A84C;
+  --gold-600: #A8863A;
+  --dark-400: #060709;
+  --dark-300: #0A0C10;
+  --dark-200: #0F1117;
+  --dark-100: #141720;
+  --dark-50:  #1A1D24;
+}
+
+/* ════════════════════════════════════════════════
+   BASE RESETS
+   ════════════════════════════════════════════════ */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /* Hide native cursor on pointer-fine (mouse/trackpad) devices only */
+  @media (pointer: fine) {
+    * { cursor: none !important; }
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    background-color: #0A0C10;
+    color: #F0EDE8;
+    font-family: var(--font-syne), system-ui, sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar              { width: 3px; }
+  ::-webkit-scrollbar-track        { background: #060709; }
+  ::-webkit-scrollbar-thumb        { background: #C9A84C; border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover  { background: #E0C055; }
+}
+
+/* ════════════════════════════════════════════════
+   COMPONENTS  (inside @layer so Tailwind utilities can override)
+   ════════════════════════════════════════════════ */
+@layer components {
+
+  /* ── Shimmer gradient text ── */
+  .shimmer-text {
+    background: linear-gradient(
+      90deg,
+      #C9A84C 0%,
+      #EDD98A 20%,
+      #F5E9BC 35%,
+      #EDD98A 50%,
+      #C9A84C 65%,
+      #EDD98A 80%,
+      #C9A84C 100%
+    );
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3.5s linear infinite;
+  }
+
+  /* ── Gold gradient text (static) ── */
+  .text-gold-gradient {
+    background: linear-gradient(135deg, #C9A84C 0%, #EDD98A 45%, #C9A84C 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── Horizontal gold divider ── */
+  .gold-divider {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(201, 168, 76, 0.25) 30%,
+      rgba(237, 217, 138, 0.4) 50%,
+      rgba(201, 168, 76, 0.25) 70%,
+      transparent 100%
+    );
+  }
+
+  /* ── Card base ── */
+  .gold-card {
+    position: relative;          /* needed for absolute children */
+    border: 1px solid rgba(201, 168, 76, 0.12);
+    background-color: #0F1117;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+  }
+  .gold-card:hover {
+    border-color: rgba(201, 168, 76, 0.35);
+    box-shadow: 0 0 30px rgba(201, 168, 76, 0.06);
+  }
+
+  /* ── Top gold line on cards via ::before ── */
+  /* position:relative is already on .gold-card, so ::before positions correctly */
+  .gold-top-line::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      #C9A84C 30%,
+      #EDD98A 50%,
+      #C9A84C 70%,
+      transparent
+    );
+    opacity: 0.3;
+    transition: opacity 0.4s ease;
+  }
+  .gold-top-line:hover::before {
+    opacity: 0.8;
+  }
+
+  /* ── Animated nav link underline ── */
+  .link-underline {
+    position: relative;
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 0; height: 1px;
+    background: linear-gradient(90deg, #C9A84C, #EDD98A);
+    transition: width 0.35s ease;
+  }
+  .link-underline:hover::after { width: 100%; }
+
+  /* ── Gold CTA button ── */
+  .btn-gold {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2.25rem;
+    background: rgba(201, 168, 76, 0.08);
+    border: 1px solid rgba(201, 168, 76, 0.45);
+    color: #C9A84C;
+    font-family: var(--font-syne), system-ui, sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .btn-gold::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.12) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
+  .btn-gold:hover {
+    background: rgba(201, 168, 76, 0.16);
+    border-color: rgba(224, 192, 85, 0.8);
+    color: #EDD98A;
+  }
+  .btn-gold:hover::after { opacity: 1; }
+
+  /* ── Ghost (secondary) button ── */
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2.25rem;
+    background: transparent;
+    border: 1px solid rgba(240, 237, 232, 0.12);
+    color: #6A6A6A;
+    font-family: var(--font-syne), system-ui, sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: border-color 0.35s ease, color 0.35s ease;
+    white-space: nowrap;
+  }
+  .btn-ghost:hover {
+    border-color: rgba(240, 237, 232, 0.35);
+    color: #F0EDE8;
+  }
+
+  /* ── Form input ── */
+  .nm-input {
+    display: block;
+    width: 100%;
+    background: #0F1117;
+    border: 1px solid rgba(201, 168, 76, 0.18);
+    color: #F0EDE8;
+    font-family: var(--font-syne), system-ui, sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    padding: 0.75rem 1rem;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .nm-input::placeholder { color: #3A3A3A; }
+  .nm-input:focus {
+    border-color: rgba(201, 168, 76, 0.55);
+    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.08);
+  }
+}
+
+/* ════════════════════════════════════════════════
+   CUSTOM CURSOR  (fixed elements, outside stacking flow)
+   ════════════════════════════════════════════════ */
+.nm-cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 168, 76, 0.65);
+  pointer-events: none;
+  z-index: 9998;
+  will-change: transform;
+  transition: width 0.25s ease, height 0.25s ease,
+              border-color 0.25s ease, background-color 0.25s ease;
+}
+.nm-cursor-ring.nm-hover {
+  width: 56px; height: 56px;
+  border-color: rgba(224, 192, 85, 0.9);
+  background-color: rgba(201, 168, 76, 0.06);
+}
+.nm-cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #C9A84C;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+}
+
+/* ════════════════════════════════════════════════
+   KEYFRAMES
+   ════════════════════════════════════════════════ */
+@keyframes shimmer {
+  0%   { background-position: -300% 0; }
+  100% { background-position:  300% 0; }
+}
+
+/* ════════════════════════════════════════════════
+   GRAIN OVERLAY (decorative noise on body)
+   ════════════════════════════════════════════════ */
+.grain-overlay::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;       /* above canvas (z-0) but below content (z-10) */
+  opacity: 0.022;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
