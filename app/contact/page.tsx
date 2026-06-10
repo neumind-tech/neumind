@@ -54,12 +54,7 @@ export default function ContactPage() {
             Let's build the future of your systems together.
           </p>
 
-          <Link
-            href="/contact/delete-account"
-            className="font-mono text-[0.6rem] text-[#3A3A3A] hover:text-[#C9A84C] transition-colors duration-300 tracking-[0.08em] underline underline-offset-4"
-          >
-            Want to delete your account? Request Account Deletion →
-          </Link>
+          
         </div>
       </section>
 
@@ -81,7 +76,7 @@ export default function ContactPage() {
               <div>
                 <span className="font-mono text-[0.55rem] tracking-[0.25em] text-[#3A3A3A] uppercase block mb-2">Headquarters</span>
                 <p className="font-sans text-sm text-[#C0BCB7] leading-[1.8]">
-                  Ranpur, Palakkad<br />
+                 Palakkad<br />
                   KERALA 678004, India
                 </p>
               </div>

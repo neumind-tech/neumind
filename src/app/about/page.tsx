@@ -84,7 +84,7 @@ export default function AboutPage() {
 
                 <div className="pt-6 border-t border-[rgba(201,168,76,0.08)]">
                   <p className="font-mono text-[0.55rem] text-[#3A3A3A] tracking-[0.15em] uppercase leading-[2]">
-                    Established 2026<br />
+                    Established 2025<br />
                     Palakkad, Kerala, India
                   </p>
                 </div>
