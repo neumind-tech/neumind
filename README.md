@@ -1,2 +1,0 @@
-# neumind
-Neumind.in
