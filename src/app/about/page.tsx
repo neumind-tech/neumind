@@ -50,8 +50,8 @@ export default function AboutPage() {
                 style={{ fontSize: 'clamp(1.25rem, 2.2vw, 1.85rem)' }}
               >
                 NeuMind was founded by{' '}
-                <span className="text-[#C9A84C]">Sanjay Darshan</span> and{' '}
-                <span className="text-[#C9A84C]">Nishad</span>, two lifelong
+                <span className="text-[#C9A84C]">Nishad M S</span> and{' '}
+                <span className="text-[#C9A84C]">Sanjay Darshan</span>, two lifelong
                 friends who began dreaming of constructing meaningful systemic
                 platforms back in their school days.
               </p>
@@ -69,7 +69,7 @@ export default function AboutPage() {
             <div className="lg:col-span-5">
               <div className="relative gold-card gold-top-line p-8 overflow-hidden">
                 <div className="space-y-6 mb-8">
-                  {['Sanjay Darshan', 'Nishad'].map((name) => (
+                  {['Nishad M S', 'Sanjay Darshan'].map((name) => (
                     <div key={name} className="flex items-center gap-4">
                       <div className="w-10 h-10 rounded-full border border-[rgba(201,168,76,0.3)] bg-[rgba(201,168,76,0.05)] flex items-center justify-center font-display text-lg text-[#C9A84C] shrink-0">
                         {name[0]}
